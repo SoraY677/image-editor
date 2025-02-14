@@ -21,8 +21,8 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@styles/*": ["./styles"],
-      "@scripts/*": ["./scripts"]
+      "@styles/*": ["./styles/*"],
+      "@scripts/*": ["./scripts/*"]
     }
   },
   "include": ["src"]
