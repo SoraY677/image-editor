@@ -1,0 +1,21 @@
+body {
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+canvas {
+  width: 60%;
+  height: auto;
+  box-shadow: 0px 0px 10px 10px #222;
+}
