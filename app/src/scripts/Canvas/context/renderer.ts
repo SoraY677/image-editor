@@ -1,21 +1,10 @@
-import { watchCanvasObject } from "@scripts/Store/CanvasStore";
 import {
   CANVAS_OBJECT_IMG_ITEM,
   CANVAS_OBJECT_MAP,
   CANVAS_OBJECT_TYPE,
-} from "@scripts/types/CanvasObject";
+} from "@scripts/Canvas/types/CanvasObjectType";
 
-export const configureRedrawContext = (
-  ctx: CanvasRenderingContext2D,
-  canvasWidth: number,
-  canvasHeight: number
-) => {
-  watchCanvasObject((canvasObjectMap) => {
-    drawContext(ctx, canvasObjectMap, canvasWidth, canvasHeight);
-  });
-};
-
-const drawContext = (
+export const drawContext = (
   ctx: CanvasRenderingContext2D,
   canvasObjectMap: CANVAS_OBJECT_MAP,
   canvasWidth: number,

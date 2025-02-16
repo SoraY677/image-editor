@@ -1,5 +1,28 @@
 type ElementType = HTMLElement | Window;
 
+export const setMouseDownEvent = (
+  element: ElementType,
+  callback: (e: Event) => void
+) => {
+  element.addEventListener("mousedown", callback);
+};
+
+export const setMouseMoveEvent = (
+  element: ElementType,
+  callback: (e: MouseEvent) => void
+) => {
+  element.addEventListener("mousemove", (e) => {
+    callback(e as MouseEvent);
+  });
+};
+
+export const setMouseUpEvent = (
+  element: ElementType,
+  callback: (e: Event) => void
+) => {
+  element.addEventListener("mouseup", callback);
+};
+
 export const setDragOverEvent = (
   element: ElementType,
   callback: (e: Event) => void
