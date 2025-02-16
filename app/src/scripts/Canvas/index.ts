@@ -9,12 +9,18 @@ import {
   addCanvasObject,
   CANVAS_OBJECT_TYPE,
 } from "@scripts/Store/CanvasStore";
+import { configureRedrawContext } from "./Context";
 
 export const initCanvas = (canvasId: string) => {
   const canvasElement = getElementById<HTMLCanvasElement>(canvasId);
+  const ctx = canvasElement.getContext("2d");
+  if (!ctx) throw "canvas context generate failed!";
+
   canvasElement.width = CANVAS_WIDTH;
   canvasElement.height = CANVAS_HEIGHT;
+
   setImageDropedEvent(canvasElement);
+  configureRedrawContext(ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 };
 
 const addCanvasImageObject = (element: HTMLCanvasElement, imageUrl: string) => {

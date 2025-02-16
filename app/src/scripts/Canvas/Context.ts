@@ -2,9 +2,20 @@ import {
   CANVAS_OBJECT_IMG_ITEM,
   CANVAS_OBJECT_MAP,
   CANVAS_OBJECT_TYPE,
+  watchCanvasObject,
 } from "@scripts/Store/CanvasStore";
 
-export const drawContext = (
+export const configureRedrawContext = (
+  ctx: CanvasRenderingContext2D,
+  canvasWidth: number,
+  canvasHeight: number
+) => {
+  watchCanvasObject((canvasObjectMap) => {
+    drawContext(ctx, canvasObjectMap, canvasWidth, canvasHeight);
+  });
+};
+
+const drawContext = (
   ctx: CanvasRenderingContext2D,
   canvasObjectMap: CANVAS_OBJECT_MAP,
   canvasWidth: number,
@@ -16,6 +27,7 @@ export const drawContext = (
     switch (object.type) {
       case CANVAS_OBJECT_TYPE.img:
         drawImageContext(ctx, object, canvasWidth, canvasHeight);
+        break;
     }
   }
 };
@@ -26,7 +38,6 @@ const drawImageContext = (
   canvasWidth: number,
   canvasHeight: number
 ) => {
-  ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx?.setTransform(
     object.scale,
     0,

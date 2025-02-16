@@ -13,8 +13,30 @@ export type CANVAS_OBJECT_IMG_ITEM = {
   imgElement: HTMLImageElement;
   scale: number;
 };
+export type CHANGE_CANVAS_OBJECT_HANDLER = (
+  canvasObjectMap: CANVAS_OBJECT_MAP
+) => void;
 
 const canvasObjectMap: CANVAS_OBJECT_MAP = {};
+let canvasObjectMapProxy = new Proxy(canvasObjectMap, {});
+
+export const watchCanvasObject = (callback: CHANGE_CANVAS_OBJECT_HANDLER) => {
+  canvasObjectMapProxy = new Proxy(canvasObjectMap, {
+    set(_, key, value) {
+      canvasObjectMap[String(key)] = value;
+      callback(canvasObjectMap);
+      return true;
+    },
+    get(target, key) {
+      return target[String(key)];
+    },
+    deleteProperty(target, key) {
+      delete target[String(key)];
+      callback(canvasObjectMap);
+      return true;
+    },
+  });
+};
 
 export const getCanvasObjectMap = () => {
   return { ...canvasObjectMap };
@@ -22,7 +44,7 @@ export const getCanvasObjectMap = () => {
 
 export const addCanvasObject = (id: string, objectItem: CANVAS_OBJECT_ITEM) => {
   if (isObjectExist(id)) throw "canvas object already exist";
-  canvasObjectMap[id] = { ...objectItem };
+  canvasObjectMapProxy[id] = { ...objectItem };
 };
 
 export const updateCanvasObject = (
@@ -30,14 +52,14 @@ export const updateCanvasObject = (
   objectItem: CANVAS_OBJECT_ITEM
 ) => {
   if (!isObjectExist(id)) throw "canvas object not exist";
-  canvasObjectMap[id] = { ...objectItem };
+  canvasObjectMapProxy[id] = { ...objectItem };
 };
 
 export const deleteCanvasObject = (id: string) => {
   if (!isObjectExist(id)) throw "canvas object not exist";
-  delete canvasObjectMap[id];
+  delete canvasObjectMapProxy[id];
 };
 
 const isObjectExist = (id: string) => {
-  return !!canvasObjectMap[id];
+  return !!canvasObjectMapProxy[id];
 };
