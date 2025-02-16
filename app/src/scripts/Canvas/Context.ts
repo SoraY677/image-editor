@@ -1,9 +1,9 @@
+import { watchCanvasObject } from "@scripts/Store/CanvasStore";
 import {
   CANVAS_OBJECT_IMG_ITEM,
   CANVAS_OBJECT_MAP,
   CANVAS_OBJECT_TYPE,
-  watchCanvasObject,
-} from "@scripts/Store/CanvasStore";
+} from "@scripts/types/CanvasObject";
 
 export const configureRedrawContext = (
   ctx: CanvasRenderingContext2D,

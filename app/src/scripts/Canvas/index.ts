@@ -5,11 +5,9 @@ import {
   DISPATCH_DROP_IMAGE_URL_TYPE,
 } from "@scripts/DropArea/config";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./config";
-import {
-  addCanvasObject,
-  CANVAS_OBJECT_TYPE,
-} from "@scripts/Store/CanvasStore";
+import { addCanvasObject } from "@scripts/Store/CanvasStore";
 import { configureRedrawContext } from "./Context";
+import { CANVAS_OBJECT_TYPE } from "@scripts/types/CanvasObject";
 
 export const initCanvas = (canvasId: string) => {
   const canvasElement = getElementById<HTMLCanvasElement>(canvasId);
